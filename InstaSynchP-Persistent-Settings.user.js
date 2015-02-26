@@ -36,7 +36,7 @@ function PersistentSettings(version) {
     'label': 'Show greynames in chat',
     'id': 'instasync-greynames-chat',
     'type': 'checkbox',
-    'default': true,
+    'default': false,
     'section': ['InstaSync']
   }, {
     'label': 'Disable player',
@@ -92,7 +92,7 @@ PersistentSettings.prototype.disablePlayer = function () {
     if (newVal) {
       $("#media").html("");
     } else {
-      reloadPlayer();
+      reloadPlayer()
     }
   });
 };
