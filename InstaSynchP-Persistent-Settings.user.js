@@ -3,7 +3,7 @@
 // @namespace   InstaSynchP
 // @description Makes the InstaSync settings persistent
 
-// @version     1.0.2
+// @version     1.0.3
 // @author      Zod-
 // @source      https://github.com/Zod-/InstaSynchP-Persistent-Settings
 // @license     MIT
@@ -80,11 +80,16 @@ PersistentSettings.prototype.disablePlayer = function () {
     }
     //kill the player
   $("#disable_player").on("click", function () {
+    
     save(true);
   });
   //recreate the player on reload
   $('#reload_btn').on("click", function () {
-    save(false);
+    if (!gmc.get('instasync-disable-player')) {
+      reloadPlayer();
+    } else {
+      save(false);
+    }
   });
   //reload/destroy player on save
   events.on(th, 'SettingChange[instasync-disable-player]', function (ignore, newVal) {
@@ -92,7 +97,7 @@ PersistentSettings.prototype.disablePlayer = function () {
     if (newVal) {
       $("#media").html("");
     } else {
-      reloadPlayer()
+      reloadPlayer();
     }
   });
 };
@@ -111,4 +116,4 @@ PersistentSettings.prototype.preConnect = function () {
 };
 
 window.plugins = window.plugins || {};
-window.plugins.persistentSettings = new PersistentSettings('1.0.2');
+window.plugins.persistentSettings = new PersistentSettings('1.0.3');
